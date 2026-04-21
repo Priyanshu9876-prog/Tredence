@@ -30,8 +30,8 @@ class PrunableLinear(nn.Module):
         # giving the optimiser room to move them toward 0 (pruned) or 1 (kept).
         self.gate_scores = nn.Parameter(torch.zeros(out_features, in_features))
 
-        # Standard Kaiming initialisation for the weights
-        nn.init.kaiming_uniform_(self.weight, a=5 ** 0.5)
+        # Standard Kaiming initialisation for the weights (ReLU non-linearity)
+        nn.init.kaiming_uniform_(self.weight, a=0)
 
     def forward(self, x: torch.Tensor) -> torch.Tensor:
         # Squash gate_scores to [0, 1]
